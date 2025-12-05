@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+  
+  
+
+  <title>Home Page</title>
+
+    <link rel="canonical" href="https://codepen.io/Devon-Oberman/pen/myPzvMx">
+  
+  
+  
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f7f4;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* nav bar */
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: #8B6F47;
+  font-weight: normal;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #555;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: #8B6F47;
+}
+
+/* big hero w slideshow */
+.hero {
+  background-color: #e8e0d5;
+  padding: 0;
+}
+
+.carousel-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* hide these radio btns */
+input[name="carousel"] {
+  display: none;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+/* slides on top of eachother fade them in/out */
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px 40px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.carousel-caption h2 {
+  color: #8B6F47;
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.carousel-caption p {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+/* show slide based on which radio is on */
+#slide-1:checked ~ .carousel .slide-1,
+#slide-2:checked ~ .carousel .slide-2,
+#slide-3:checked ~ .carousel .slide-3 {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* arrows left/right */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #8B6F47;
+  border: none;
+  padding: 15px 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}
+
+/*  dots under carousel */
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* active dot (just matching radio again) */
+#slide-1:checked ~ .carousel-indicators label[for="slide-1"],
+#slide-2:checked ~ .carousel-indicators label[for="slide-2"],
+#slide-3:checked ~ .carousel-indicators label[for="slide-3"] {
+  background-color: #fff;
+}
+
+/* about section text */
+.about {
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.about h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #8B6F47;
+  margin-bottom: 40px;
+  font-weight: normal;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* footer */
+footer {
+  background-color: #8B6F47;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* phone / tablet tweaks */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-menu {
+    gap: 1rem;
+  }
+
+  .carousel {
+    height: 400px;
+  }
+
+  .carousel-caption h2 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-btn {
+    padding: 10px 15px;
+    font-size: 1.2rem;
+  }
+
+  .about h2 {
+    font-size: 2rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    height: 300px;
+  }
+
+  .carousel-caption {
+    bottom: 20px;
+    padding: 10px 20px;
+  }
+
+  .carousel-caption h2 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-btn {
+    padding: 8px 12px;
+    font-size: 1rem;
+  }
+
+  .carousel-btn.prev {
+    left: 10px;
+  }
+
+  .carousel-btn.next {
+    right: 10px;
+  }
+}
+</style>
+
+  
+  
+  
+</head>
+
+<body>
+  <body>
+  <!-- nav bar up top -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="logo">Watercolor Gallery</h1>
+      <ul class="nav-menu">
+        <li><a href="https://codepen.io/Devon-Oberman/full/myPzvMx" class="active">Home</a></li>
+        <li><a href="https://codepen.io/Devon-Oberman/full/qEZJvrK">Gallery</a></li>
+        <li><a href="https://codepen.io/Devon-Oberman/full/gbrQLVZ">Awards &amp; Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- hero / main banner w carousel -->
+  <section class="hero">
+    <div class="carousel-container">
+
+      <!--  radio  so it works w/out js -->
+      <input type="radio" name="carousel" id="slide-1" checked>
+      <input type="radio" name="carousel" id="slide-2">
+      <input type="radio" name="carousel" id="slide-3">
+
+      <div class="carousel">
+        <div class="carousel-slide slide-1">
+          <img src="https://images.squarespace-cdn.com/content/v1/541af314e4b03f1e880f1382/1600708964884-KEFTJ73FOM17SZNGNIDB/Sabrett+on+5th.jpg?format=2500w" alt="Sabrett on 5th">
+          <div class="carousel-caption">
+            <h2>Sabrett on 5th</h2>
+            <p>Watercolor on paper · 2020</p>
+          </div>
+
+          <!-- arrows for 1st slide -->
+          <label for="slide-3" class="carousel-btn prev">&#10094;</label>
+          <label for="slide-2" class="carousel-btn next">&#10095;</label>
+        </div>
+
+        <div class="carousel-slide slide-2">
+          <img src="https://images.squarespace-cdn.com/content/v1/541af314e4b03f1e880f1382/1600708909585-H8JK7R4IFBLQ02KAQMMX/Preservation+on+Meeting+Street.jpg?format=2500w" alt="Preservation on Meeting Street">
+          <div class="carousel-caption">
+            <h2>Preservation on Meeting Street</h2>
+            <p>Watercolor on paper · 2019</p>
+          </div>
+
+          <label for="slide-1" class="carousel-btn prev">&#10094;</label>
+          <label for="slide-3" class="carousel-btn next">&#10095;</label>
+        </div>
+
+        <div class="carousel-slide slide-3">
+          <img src="https://images.squarespace-cdn.com/content/v1/541af314e4b03f1e880f1382/1600708999031-NPDKFV37ZTL4QOX7IJCL/Under+the+Angel.jpg?format=2500w" alt="Under the Angel">
+          <div class="carousel-caption">
+            <h2>Under the Angel</h2>
+            <p>Watercolor on paper · 2017</p>
+          </div>
+
+          <label for="slide-2" class="carousel-btn prev">&#10094;</label>
+          <label for="slide-1" class="carousel-btn next">&#10095;</label>
+        </div>
+      </div>
+
+      <!--  dots under slides -->
+      <div class="carousel-indicators">
+        <label for="slide-1" class="indicator"></label>
+        <label for="slide-2" class="indicator"></label>
+        <label for="slide-3" class="indicator"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container">
+      <h2>About the Artist</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>I created this website to showcase my mom’s watercolor artwork, which has been a huge part of my life growing up. She’s a lifelong artist who started in illustration and graphic design before returning to watercolor in 2012. Her paintings explore everyday moments, portraits, and the places that have shaped our family from our hometown river towns to the streets of New York and Philadelphia. Through this site, I just wanted to share her work, her stories, and the creativity that continues to inspire so many people.
+
+          </p>
+   
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Watercolor Gallery. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+</body>
+</html>
+  
+  
+  
+</body>
+
+</html>
